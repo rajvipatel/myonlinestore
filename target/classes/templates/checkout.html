@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout - myonlinestore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-gray-50 py-12">
+    <div class="container mx-auto px-4 max-w-3xl">
+        <a href="/" class="flex items-center text-gray-600 hover:text-gray-800 mb-8">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Back to Cart
+        </a>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold mb-6">Order Summary</h2>
+            <div id="order-items" class="divide-y divide-gray-200"></div>
+            
+            <div class="border-t border-gray-200 mt-6 pt-6">
+                <div class="flex justify-between text-xl font-bold">
+                    <p>Total</p>
+                    <p id="order-total">$0.00</p>
+                </div>
+            </div>
+
+            <a href="/payment" class="block w-full mt-8 bg-blue-600 text-white text-center font-medium py-3 px-6 rounded-md hover:bg-blue-700 transition-colors">
+                Next Step
+            </a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const orderItems = document.getElementById('order-items');
+            const orderTotal = document.getElementById('order-total');
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            orderTotal.textContent = `$${total.toFixed(2)}`;
+            
+            orderItems.innerHTML = cart.map(item => `
+                <div class="py-4 flex justify-between">
+                    <div class="flex items-center">
+                        <img src="${item.imageUrl}" alt="${item.name}" class="h-16 w-16 object-cover rounded">
+                        <div class="ml-4">
+                            <h3 class="font-medium">${item.name}</h3>
+                            <p class="text-gray-500">Quantity: ${item.quantity}</p>
+                        </div>
+                    </div>
+                    <p class="font-medium">$${(item.price * item.quantity).toFixed(2)}</p>
+                </div>
+            `).join('');
+        });
+    </script>
+</body>
+</html>

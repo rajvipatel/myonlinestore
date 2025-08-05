@@ -1,0 +1,207 @@
+<!-- START GENAI -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>myonlinestore - Modern E-commerce Store</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/css/styles.css" rel="stylesheet" />
+</head>
+<body class="min-h-screen bg-gray-50">
+<!-- Header -->
+<header class="fixed top-0 left-0 right-0 bg-white shadow-md py-4 z-50">
+    <div class="container mx-auto px-4 flex justify-between items-center">
+        <h1 class="text-2xl font-bold text-blue-600">myonlinestore</h1>
+        <button id="cart-button" class="relative p-2">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+            <span id="cart-count" class="absolute -top-1 -right-1 bg-blue-600 text-white text-xs font-bold rounded-full w-5 h-5 flex items-center justify-center">0</span>
+        </button>
+    </div>
+</header>
+
+<!-- Hero Section -->
+<section class="pt-24 pb-12 bg-gradient-to-r from-blue-50 to-indigo-50">
+    <div class="container mx-auto px-4">
+        <div class="max-w-2xl">
+            <h2 class="text-4xl font-bold text-gray-900 mb-4">
+                Shop the Latest <span class="block text-blue-600">Premium Products</span>
+            </h2>
+            <p class="text-lg text-gray-600 mb-8">
+                Discover our curated collection of high-quality items designed to enhance your lifestyle.
+            </p>
+        </div>
+    </div>
+</section>
+
+<!-- Products Grid -->
+<section class="py-12">
+    <div class="container mx-auto px-4">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+            <!-- Product 1 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Premium Wireless Headphones" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-medium text-lg mb-1">Premium Wireless Headphones</h3>
+                    <p class="text-blue-600 font-bold mb-2">$199.99</p>
+                    <p class="text-gray-600 mb-4">Immersive sound quality with noise cancellation technology.</p>
+                    <button class="add-to-cart w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+                            data-product='{"id": 1, "name": "Premium Wireless Headphones", "price": 199.99, "imageUrl": "https://images.pexels.com/photos/3394650/pexels-photo-3394650.jpeg?auto=compress&cs=tinysrgb&w=800"}'>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Product 2 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Smart Watch Series 7" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-medium text-lg mb-1">Smart Watch Series 7</h3>
+                    <p class="text-blue-600 font-bold mb-2">$349.99</p>
+                    <p class="text-gray-600 mb-4">Track your fitness goals and stay connected on the go.</p>
+                    <button class="add-to-cart w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+                            data-product='{"id": 2, "name": "Smart Watch Series 7", "price": 349.99, "imageUrl": "https://images.pexels.com/photos/437037/pexels-photo-437037.jpeg?auto=compress&cs=tinysrgb&w=800"}'>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Product 3 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Leather Messenger Bag" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-medium text-lg mb-1">Leather Messenger Bag</h3>
+                    <p class="text-blue-600 font-bold mb-2">$129.99</p>
+                    <p class="text-gray-600 mb-4">Handcrafted genuine leather bag for your daily essentials.</p>
+                    <button class="add-to-cart w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+                            data-product='{"id": 3, "name": "Leather Messenger Bag", "price": 129.99, "imageUrl": "https://images.pexels.com/photos/1152077/pexels-photo-1152077.jpeg?auto=compress&cs=tinysrgb&w=800"}'>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Product 4 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://images.pexels.com/photos/1112598/pexels-photo-1112598.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Minimalist Desk Lamp" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-medium text-lg mb-1">Minimalist Desk Lamp</h3>
+                    <p class="text-blue-600 font-bold mb-2">$59.99</p>
+                    <p class="text-gray-600 mb-4">Adjustable LED lamp with touch controls and multiple brightness settings.</p>
+                    <button class="add-to-cart w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+                            data-product='{"id": 4, "name": "Minimalist Desk Lamp", "price": 59.99, "imageUrl": "https://images.pexels.com/photos/1112598/pexels-photo-1112598.jpeg?auto=compress&cs=tinysrgb&w=800"}'>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Product 5 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://images.pexels.com/photos/1566308/pexels-photo-1566308.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Ceramic Coffee Mug Set" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-medium text-lg mb-1">Ceramic Coffee Mug Set</h3>
+                    <p class="text-blue-600 font-bold mb-2">$39.99</p>
+                    <p class="text-gray-600 mb-4">Set of 4 hand-painted ceramic mugs, dishwasher safe.</p>
+                    <button class="add-to-cart w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+                            data-product='{"id": 5, "name": "Ceramic Coffee Mug Set", "price": 39.99, "imageUrl": "https://images.pexels.com/photos/1566308/pexels-photo-1566308.jpeg?auto=compress&cs=tinysrgb&w=800"}'>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Product 6 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://images.pexels.com/photos/1706694/pexels-photo-1706694.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Portable Bluetooth Speaker" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-medium text-lg mb-1">Portable Bluetooth Speaker</h3>
+                    <p class="text-blue-600 font-bold mb-2">$79.99</p>
+                    <p class="text-gray-600 mb-4">Waterproof speaker with 20-hour battery life and rich sound.</p>
+                    <button class="add-to-cart w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+                            data-product='{"id": 6, "name": "Portable Bluetooth Speaker", "price": 79.99, "imageUrl": "https://images.pexels.com/photos/1706694/pexels-photo-1706694.jpeg?auto=compress&cs=tinysrgb&w=800"}'>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Product 7 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://images.pexels.com/photos/2905238/pexels-photo-2905238.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Lightweight Travel Backpack" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-medium text-lg mb-1">Lightweight Travel Backpack</h3>
+                    <p class="text-blue-600 font-bold mb-2">$89.99</p>
+                    <p class="text-gray-600 mb-4">Durable backpack with multiple compartments and laptop sleeve.</p>
+                    <button class="add-to-cart w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+                            data-product='{"id": 7, "name": "Lightweight Travel Backpack", "price": 89.99, "imageUrl": "https://images.pexels.com/photos/2905238/pexels-photo-2905238.jpeg?auto=compress&cs=tinysrgb&w=800"}'>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Product 8 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://images.pexels.com/photos/1188649/pexels-photo-1188649.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Stainless Steel Water Bottle" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-medium text-lg mb-1">Stainless Steel Water Bottle</h3>
+                    <p class="text-blue-600 font-bold mb-2">$29.99</p>
+                    <p class="text-gray-600 mb-4">Vacuum insulated bottle that keeps drinks cold for 24 hours.</p>
+                    <button class="add-to-cart w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+                            data-product='{"id": 8, "name": "Stainless Steel Water Bottle", "price": 29.99, "imageUrl": "https://images.pexels.com/photos/1188649/pexels-photo-1188649.jpeg?auto=compress&cs=tinysrgb&w=800"}'>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Product 9 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://images.pexels.com/photos/4526407/pexels-photo-4526407.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Wireless Charging Pad" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-medium text-lg mb-1">Wireless Charging Pad</h3>
+                    <p class="text-blue-600 font-bold mb-2">$49.99</p>
+                    <p class="text-gray-600 mb-4">Fast-charging wireless pad compatible with all Qi-enabled devices.</p>
+                    <button class="add-to-cart w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+                            data-product='{"id": 9, "name": "Wireless Charging Pad", "price": 49.99, "imageUrl": "https://images.pexels.com/photos/4526407/pexels-photo-4526407.jpeg?auto=compress&cs=tinysrgb&w=800"}'>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Product 10 -->
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <img src="https://images.pexels.com/photos/3270223/pexels-photo-3270223.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Scented Soy Candle" class="w-full h-48 object-cover">
+                <div class="p-4">
+                    <h3 class="font-medium text-lg mb-1">Scented Soy Candle</h3>
+                    <p class="text-blue-600 font-bold mb-2">$19.99</p>
+                    <p class="text-gray-600 mb-4">Hand-poured soy candle with essential oils, 40-hour burn time.</p>
+                    <button class="add-to-cart w-full bg-blue-600 text-white py-2 rounded hover:bg-blue-700 transition-colors"
+                            data-product='{"id": 10, "name": "Scented Soy Candle", "price": 19.99, "imageUrl": "https://images.pexels.com/photos/3270223/pexels-photo-3270223.jpeg?auto=compress&cs=tinysrgb&w=800"}'>
+                        Add to Cart
+                    </button>
+                </div>
+            </div>
+            <!-- Add more products as needed -->
+        </div>
+    </div>
+</section>
+
+<!-- Cart Drawer -->
+<div id="cart-overlay" class="fixed inset-0 bg-black opacity-50 invisible opacity-0 transition-opacity z-40"></div>
+<div id="cart-drawer" class="fixed top-0 right-0 bottom-0 w-full max-w-md bg-white shadow-lg transform translate-x-full transition-transform z-50">
+    <div class="flex flex-col h-full">
+        <div class="px-6 py-4 border-b border-gray-200 flex justify-between items-center">
+            <h2 class="text-xl font-bold">Your Cart</h2>
+            <button id="close-cart" class="text-gray-500 hover:text-gray-700">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="flex-1 overflow-y-auto p-6">
+            <div id="cart-items" class="divide-y divide-gray-200"></div>
+        </div>
+
+        <div class="border-t border-gray-200 p-6">
+            <div class="flex justify-between text-lg font-bold mb-4">
+                <span>Total</span>
+                <span id="cart-total">$0.00</span>
+            </div>
+            <a href="/checkout" class="block w-full bg-blue-600 text-white text-center py-3 rounded-md hover:bg-blue-700 transition-colors">Checkout</a>
+        </div>
+    </div>
+</div>
+
+<script src="/js/cart.js"></script>
+</body>
+</html>
