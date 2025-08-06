@@ -32,7 +32,9 @@
             </a>
         </div>
     </div>
-
+    <script th:src="${clientLibrary}"
+            th:integrity="${clientLibraryIntegrity}"
+            crossorigin="anonymous"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const cart = JSON.parse(localStorage.getItem('cart') || '[]');
@@ -56,5 +58,32 @@
             `).join('');
         });
     </script>
+    <script>
+    var showArgs = {
+        containers: {
+            paymentSelection: "#buttonPaymentListContainer"
+        }
+    };
+    var jwt = document.getElementById("jwt").value;
+
+    // Wrap the code in an async function and immediately invoke it
+    async function processPayment() {
+        try {
+            const accept = await Accept(jwt);
+            const up = await accept.unifiedPayments(true);
+            const tt = await up.show(showArgs);
+            const completeResponse = await up.complete(tt);
+
+            console.log(completeResponse); // merchant logic for handling complete response
+        } catch (error) {
+            // merchant logic for handling issues
+            console.error("something went wrong: " + error);
+        }
+    }
+
+    // Call the async function
+    processPayment();
+
+</script>
 </body>
 </html>
