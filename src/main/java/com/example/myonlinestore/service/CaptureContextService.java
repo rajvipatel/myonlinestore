@@ -2,7 +2,7 @@ package com.example.myonlinestore.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import com.example.model.myonlinestore.RequestData;
+import com.example.myonlinestore.model.RequestData;
 
 import java.util.*;
 
