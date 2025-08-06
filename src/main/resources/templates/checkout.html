@@ -66,11 +66,10 @@
     };
 
     //var jwt = /*[[${jwt}]]*/ '';
-
     //var jwt = "${jwt}";
     //var jwt = document.getElementById("jwt").value;
-    var jwt = document.getElementById("payment-data").dataset.jwt;
-
+    //var jwt = document.getElementById("payment-data").dataset.jwt;
+    var jwt = '[[${jwt}]]';
 
     // Wrap the code in an async function and immediately invoke it
     async function processPayment() {
