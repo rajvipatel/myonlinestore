@@ -64,7 +64,9 @@
             paymentSelection: "#buttonPaymentListContainer"
         }
     };
-    var jwt = document.getElementById("jwt").value;
+
+    var jwt = "${jwt}";
+    //var jwt = document.getElementById("jwt").value;
 
     // Wrap the code in an async function and immediately invoke it
     async function processPayment() {
