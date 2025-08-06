@@ -3,7 +3,7 @@ package com.example.myonlinestore.service;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTVerifier;
 import com.auth0.jwt.algorithms.Algorithm;
-import com.example.model.JWK;
+import com.example.myonlinestore.model.JWK;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.nimbusds.jose.JWEDecrypter;
 import com.nimbusds.jose.JWEObject;
