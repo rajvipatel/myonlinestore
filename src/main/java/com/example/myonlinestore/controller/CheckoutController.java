@@ -74,9 +74,6 @@ public class CheckoutController {
     public String showCheckout(Model model) {
 
         try {
-             // Add Permissions Policy header
-        response.setHeader("Permissions-Policy", "payment=*");
-        
             /* CyberSource round-trip ------------------------------------------------ */
             String jwt = captureContextService.getCaptureContext(requestData);
 

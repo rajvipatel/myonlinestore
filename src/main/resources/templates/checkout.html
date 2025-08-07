@@ -3,6 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="Permissions-Policy" content="payment=*">
+    <title>Checkout - myonlinestore</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body class="min-h-screen bg-gray-50 py-12">
+    <div class="container mx-auto px-4 max-w-3xl">
+        <a href="/" class="flex items-center text-gray-600 hover:text-gray-800 mb-8">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" viewBox="0 0 20 20" fill="currentColor">
+                <path fill-rule="evenodd" d="M9.707 16.707a1 1 0 01-1.414 0l-6-6a1 1 0 010-1.414l6-6a1 1 0 011.414 1.414L5.414 9H17a1 1 0 110 2H5.414l4.293 4.293a1 1 0 010 1.414z" clip-rule="evenodd" />
+            </svg>
+            Back to Cart
+        </a>
+
+        <div class="bg-white rounded-lg shadow-lg p-6">
+            <h2 class="text-2xl font-bold mb-6">Order Summary</h2>
+            <div id="order-items" class="divide-y divide-gray-200"></div>
+            
+            <div class="border-t border-gray-200 mt-6 pt-6">
+                <div class="flex justify-between text-xl font-bold">
+                    <p>Total</p>
+                    <p id="order-total">$0.00</p>
+                </div>
+            </div>
+
+            <!-- Add hidden input for JWT -->
+            <input type="hidden" id="jwt" th:value="${jwt}" />
+            
+            <!-- Add container for payment buttons -->
+            <div id="buttonPaymentListContainer" class="mt-6"></div>
+
+            <!-- Example of iframe with payment permission (if you need to embed payment content) -->
+            <!-- 
+            <iframe 
+                src="/payment-widget" 
+                allow="payment; encrypted-media"
+                sandbox="allow-scripts allow-same-origin allow-forms"
+                class="w-full h-64 border rounded-lg mt-4"
+                style="display: none;">
+            </iframe>
+            -->
+
+            <button id="process-payment-btn" class="block w-full mt-8 bg-blue-600 text-white text-center font-medium py-3 px-6 rounded-md hover:bg-blue-700 transition-colors">
+                Process Payment
+            </button>
+        </div>
+    </div>
+    
+    <script th:src="${clientLibrary}"
+            th:integrity="${clientLibraryIntegrity}"
+            crossorigin="anonymous"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cart = JSON.parse(localStorage.getItem('cart') || '[]');
+            const orderItems = document.getElementById('order-items');
+            const orderTotal = document.getElementById('order-total');
+            
+            const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            orderTotal.textContent = `$${total.toFixed(2)}`;
+            
+            orderItems.innerHTML = cart.map(item => `
+                <div class="py-4 flex justify-between">
+                    <div class="flex items-center">
+                        <img src="${item.imageUrl}" alt="${item.name}" class="h-16 w-16 object-cover rounded">
+                        <div class="ml-4">
+                            <h3 class="font-medium">${item.name}</h3>
+                            <p class="text-gray-500">Quantity: ${item.quantity}</p>
+                        </div>
+                    </div>
+                    <p class="font-medium">$${(item.price * item.quantity).toFixed(2)}</p>
+                </div>
+            `).join('');
+        });
+    </script>
+    
+    <script>
+        // Check if payment APIs are supported
+        function checkPaymentSupport() {
+            if (!window.PaymentRequest) {
+                console.error('PaymentRequest API is not supported');
+                return false;
+            }
+            return true;
+        }
+
+        var showArgs = {
+            containers: {
+                paymentSelection: "#buttonPaymentListContainer"
+            }
+        };
+
+        // Fix JWT retrieval
+        function getJWT() {
+            const jwtElement = document.getElementById("jwt");
+            if (jwtElement && jwtElement.value) {
+                return jwtElement.value;
+            }
+            // Fallback to Thymeleaf expression
+            return /*[[${jwt}]]*/ '';
+        }
+
+        // Modified processPayment function with better error handling
+        async function processPayment() {
+            try {
+                // Check browser support first
+                if (!checkPaymentSupport()) {
+                    throw new Error('Payment API not supported in this browser');
+                }
+
+                const jwt = getJWT();
+                if (!jwt) {
+                    throw new Error('JWT token is missing');
+                }
+
+                console.log('Initializing payment with JWT:', jwt.substring(0, 20) + '...');
+                
+                const accept = await Accept(jwt);
+                const up = await accept.unifiedPayments(true);
+                const tt = await up.show(showArgs);
+                const completeResponse = await up.complete(tt);
+
+                console.log('Payment completed successfully:', completeResponse);
+                // Add your success handling logic here
+                
+            } catch (error) {
+                console.error("Payment processing failed:", error);
+                
+                // Show user-friendly error message
+                const errorDiv = document.createElement('div');
+                errorDiv.className = 'bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mt-4';
+                errorDiv.innerHTML = `
+                    <strong>Payment Error:</strong> ${error.message}
+                    <br><small>Please try again or contact support if the issue persists.</small>
+                `;
+                document.querySelector('.bg-white').appendChild(errorDiv);
+            }
+        }
+
+        // Add click handler instead of auto-executing
+        document.addEventListener('DOMContentLoaded', () => {
+            const paymentBtn = document.getElementById('process-payment-btn');
+            if (paymentBtn) {
+                paymentBtn.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    processPayment();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+<!-- <!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Checkout - myonlinestore</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="/css/styles.css" rel="stylesheet">
@@ -91,4 +254,4 @@
 
 </script>
 </body>
-</html>
+</html> -->
